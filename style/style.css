@@ -1,0 +1,132 @@
+html{
+    height: 100%;
+}
+button{
+    border: 0;
+    outline: 0;
+}
+.Modalbg{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.37);
+    display: none;
+}
+/* Modal */
+.Modal{
+    width: 650px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 60px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 30%;
+    font-size: 20px;
+    color: rgb(224, 220, 156);
+    background-color: rgb(58, 57, 57);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px black;
+    display: none;
+}
+.Modal .submit .closeBtn{
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: rgb(219, 39, 39);
+    cursor: pointer;
+}
+.Modal p,.Modal h1{
+    margin-bottom: 10px;
+}
+.Modal input{
+    height: 30px;
+    width: 100%;
+    border: 1px solid rgb(224, 220, 156);
+    border-radius: 3px;
+}
+
+.Modal textarea{
+    width: 100%;
+    height: 60px;
+    border: 1px solid rgb(224, 220, 156);
+    border-radius: 3px;
+}
+.Modal .media{
+    margin: 40px 0;
+    display: none;
+}
+.Modal .text{
+    display: none;
+    margin: 50px 0 10px 0;
+}
+.Modal .submit{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.Modal .submit .addBtn{
+    width: 60px;
+    height: 25px;
+    background-color: rgb(219, 39, 39);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-image: url('../images/cool-background.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.inner{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(66, 66, 66, 0.582);
+    text-align: center;
+}
+/* Header */
+.inner header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.534);
+}
+.inner header .title{
+    padding: 20px ;
+    color: rgb(219, 39, 39);
+    font-size: 46px;
+    font-weight: 800;
+}
+.inner header .BtnBox{
+    display: flex;
+    margin-bottom: 20px;
+}
+.inner header .BtnBox .Btn{
+    margin: 0 5px;
+    padding: 10px 30px;
+    background-color:rgb(219, 39, 39);
+    border-radius: 2px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.inner header .BtnBox .Btn:hover{
+    opacity: 0.8;
+}
+.inner .contents{
+    flex: 1;
+}
+/* Footer */
+.inner footer{
+    color: white;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.534);
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="./build/main.js" defer></script>
+</head>
+<body>
+    <section class="inner">
+        <header>
+            <h1 class="title">Motion</h1>
+            <div class="BtnBox">
+                <button class="Btn" data-value="img">IMAGE</button>
+                <button class="Btn" data-value="video">VIDEO</button>
+                <button class="Btn" data-value="note">NOTE</button>
+                <button class="Btn" data-value="task">TASK</button>
+            </div>
+        </header>
+        <ul class="contents"></ul>
+        <footer>Copyright By Duckon</footer>
+    </section>
+    <div class="Modalbg"></div>
+    <div class="Modal">
+        <div class="submit"><button class="closeBtn">x</button></div>
+        <div>
+            <h1>Title</h1>
+            <input type="text">
+        </div>
+        <div class="media">
+            <p>URL</p>
+            <input type="text">
+        </div>
+        <div class="text">
+            <p>Body</p>
+            <textarea></textarea>
+        </div>
+        <div class="submit"><button class="addBtn">ADD</button></div>
+    </div>
+</body>
+</html>
