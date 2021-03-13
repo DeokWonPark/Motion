@@ -123,6 +123,64 @@ body{
 }
 .inner .contents{
     flex: 1;
+    overflow-y: auto;
+}
+
+.inner .contents .page{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.inner .contents .page .media,
+.inner .contents .page .text{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px black;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+.inner .contents .page .media:hover,
+.inner .contents .page .text:hover{
+    transform: scale(1.03);
+}
+.inner .contents .page .media .itemImg{
+    width: 400px;
+    height: 250px;
+    border-radius: 10px;
+}
+.inner .contents .page .media .mediaTitle,
+.inner .contents .page .text .textTitle{
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(224, 220, 156);
+}
+.inner .contents .page .media .closeBtn,
+.inner .contents .page .text .closeBtn{
+    border: none;
+    background: none;
+    margin-right: 20px;
+    font-size: 24px;
+    color: rgb(219, 39, 39);
+    cursor: pointer;
+}
+
+.inner .contents .page .text{
+    text-align: start;
+    box-sizing: border-box;
+    padding: 30px;
+}
+.inner .contents .page .text .textTitle{
+    margin-bottom: 20px;
+}
+.inner .contents .page .text .textBody{
+    color: white;
 }
 /* Footer */
 .inner footer{
@@ -130,3 +188,4 @@ body{
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.534);
 }
+

@@ -1,4 +1,4 @@
-import { PageComponent } from "./components/page.js";
+import { PageComponent } from "./components/page/page.js";
 var App = (function () {
     function App(appRoot) {
         this.page = new PageComponent();
