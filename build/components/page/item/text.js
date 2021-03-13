@@ -16,7 +16,7 @@ var TextComponent = (function (_super) {
     __extends(TextComponent, _super);
     function TextComponent(title, body) {
         var _this = this;
-        var text = "\n            <div class=\"Text\">\n                <h1 class=\"textTitle\"></h1>\n                <p class=\"textBody\"></p>\n            </div>";
+        var text = "\n            <div class=\"Text\">\n                <h1 class=\"textTitle\"></h1>\n                <p class=\"textBody\"></p>\n            </div>\n            <button class=\"closeBtn\">X</button>";
         _this = _super.call(this, "section", 'text', text) || this;
         var titles = _this.element.querySelector('.textTitle');
         titles.textContent = title;

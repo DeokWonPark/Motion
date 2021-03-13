@@ -6,7 +6,8 @@ export class VideoComponent extends BasePageComponentImple<HTMLLIElement>{
         if(sort==='video'){
             const video=`
                 <iframe class="itemImg"></iframe>    
-                <h1 class="mediaTitle"></h1>`;
+                <h1 class="mediaTitle"></h1>
+                <button class="closeBtn">X</button>`;
             super('section','media',video);
 
             url=this.convertURL(url);
@@ -14,7 +15,8 @@ export class VideoComponent extends BasePageComponentImple<HTMLLIElement>{
         else{
             const img=`
                 <img class="itemImg"></img>
-                <h1 class="mediaTitle"></h1>`;
+                <h1 class="mediaTitle"></h1>
+                <button class="closeBtn">X</button>`;
             super('section','media',img);
         }
 
@@ -26,6 +28,7 @@ export class VideoComponent extends BasePageComponentImple<HTMLLIElement>{
     private convertURL(url:string):string{
         const regExp=/^(?:https?:\/\/)?(?:www\.)?(?:(?:youtube.com\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9-]{11}))|(?:youtu.be\/([a-zA-Z0-9-]{11})))/;
         const match=url.match(regExp);
+        console.log(match)
 
         const videoId=match? match[1] || match[2] : undefined;
         if(videoId){

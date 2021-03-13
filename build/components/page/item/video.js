@@ -17,12 +17,12 @@ var VideoComponent = (function (_super) {
     function VideoComponent(sort, url, title) {
         var _this = this;
         if (sort === 'video') {
-            var video = "\n                <iframe class=\"itemImg\"></iframe>    \n                <h1 class=\"mediaTitle\"></h1>";
+            var video = "\n                <iframe class=\"itemImg\"></iframe>    \n                <h1 class=\"mediaTitle\"></h1>\n                <button class=\"closeBtn\">X</button>";
             _this = _super.call(this, 'section', 'media', video) || this;
             url = _this.convertURL(url);
         }
         else {
-            var img = "\n                <img class=\"itemImg\"></img>\n                <h1 class=\"mediaTitle\"></h1>";
+            var img = "\n                <img class=\"itemImg\"></img>\n                <h1 class=\"mediaTitle\"></h1>\n                <button class=\"closeBtn\">X</button>";
             _this = _super.call(this, 'section', 'media', img) || this;
         }
         var titles = _this.element.querySelector('.mediaTitle');
@@ -34,6 +34,7 @@ var VideoComponent = (function (_super) {
     VideoComponent.prototype.convertURL = function (url) {
         var regExp = /^(?:https?:\/\/)?(?:www\.)?(?:(?:youtube.com\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9-]{11}))|(?:youtu.be\/([a-zA-Z0-9-]{11})))/;
         var match = url.match(regExp);
+        console.log(match);
         var videoId = match ? match[1] || match[2] : undefined;
         if (videoId) {
             return "https://www.youtube.com/embed/" + videoId;
