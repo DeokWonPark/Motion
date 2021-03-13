@@ -1,7 +1,7 @@
-import { PageComponent } from "./components/page/page.js";
+import { PageComponent, PageItemComponent } from "./components/page/page.js";
 var App = (function () {
     function App(appRoot) {
-        this.page = new PageComponent();
+        this.page = new PageComponent(PageItemComponent);
         this.page.attachTo(appRoot);
     }
     return App;

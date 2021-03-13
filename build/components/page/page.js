@@ -17,7 +17,13 @@ import { VideoComponent } from "./item/video.js";
 var PageItemComponent = (function (_super) {
     __extends(PageItemComponent, _super);
     function PageItemComponent() {
-        return _super.call(this, 'li', 'pageItem', '<button class="closeBtn">X</button>') || this;
+        var _this = _super.call(this, 'li', 'pageItem', '<button class="closeBtn">X</button>') || this;
+        var closeBtn = _this.element.querySelector('.closeBtn');
+        console.log(closeBtn);
+        closeBtn.onclick = function () {
+            _this.element.remove();
+        };
+        return _this;
     }
     PageItemComponent.prototype.addChild = function (component) {
         component.attachTo(this.element, 'afterbegin');
@@ -27,8 +33,9 @@ var PageItemComponent = (function (_super) {
 export { PageItemComponent };
 var PageComponent = (function (_super) {
     __extends(PageComponent, _super);
-    function PageComponent() {
+    function PageComponent(PageItemMaker) {
         var _this = _super.call(this, "ul", 'page') || this;
+        _this.PageItemMaker = PageItemMaker;
         var imgElement = new VideoComponent("img", "https://file.moyiza.kr/data/moyiza/document_files/images/2017/04/26/33cff99aed5d97fd56ddbe933cbfd1b7.jpg", "Celebrity");
         var videoElement = new VideoComponent("video", "https://www.youtube.com/watch?v=8pu3yXrNKZw", "튜브김민교");
         var textElement = new TextComponent("Motion", "React의 중요성");
@@ -38,7 +45,7 @@ var PageComponent = (function (_super) {
         return _this;
     }
     PageComponent.prototype.addChild = function (element) {
-        var pageItem = new PageItemComponent();
+        var pageItem = new this.PageItemMaker();
         pageItem.addChild(element);
         pageItem.attachTo(this.element);
     };
