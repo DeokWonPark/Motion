@@ -124,7 +124,10 @@ body{
 .inner .contents{
     flex: 1;
     overflow-y: auto;
+    -ms-overflow-style: none;
 }
+.inner .contents::-webkit-scrollbar{ display:none; }
+
 
 .inner .contents .page{
     width: 100%;
@@ -134,22 +137,28 @@ body{
     justify-content: center;
     box-sizing: border-box;
 }
-.inner .contents .page .media,
-.inner .contents .page .text{
+.inner .contents .pageItem{
     width: 90%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     margin-top: 30px;
+    transition: transform 0.5s ease;
     border-radius: 10px;
     box-shadow: 2px 2px 10px black;
     cursor: pointer;
-    transition: transform 0.5s ease;
 }
-.inner .contents .page .media:hover,
-.inner .contents .page .text:hover{
+.inner .contents .pageItem:hover{
     transform: scale(1.03);
 }
+.inner .contents .page .media,
+.inner .contents .page .text{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .inner .contents .page .media .itemImg{
     width: 400px;
     height: 250px;
@@ -161,14 +170,17 @@ body{
     font-weight: 600;
     color: rgb(224, 220, 156);
 }
-.inner .contents .page .media .closeBtn,
-.inner .contents .page .text .closeBtn{
+.inner .contents .page .closeBtn{
+    height: 50px;
     border: none;
     background: none;
     margin-right: 20px;
     font-size: 24px;
     color: rgb(219, 39, 39);
     cursor: pointer;
+}
+.inner .contents .page .closeBtn:hover{
+    color: black;
 }
 
 .inner .contents .page .text{

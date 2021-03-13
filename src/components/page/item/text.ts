@@ -6,8 +6,7 @@ export class TextComponent extends BasePageComponentImple<HTMLLIElement>{
             <div class="Text">
                 <h1 class="textTitle"></h1>
                 <p class="textBody"></p>
-            </div>
-            <button class="closeBtn">X</button>`
+            </div>`
         super("section",'text',text);
 
         const titles=this.element.querySelector('.textTitle')! as HTMLHeadingElement;

@@ -17,12 +17,12 @@ var VideoComponent = (function (_super) {
     function VideoComponent(sort, url, title) {
         var _this = this;
         if (sort === 'video') {
-            var video = "\n                <iframe class=\"itemImg\"></iframe>    \n                <h1 class=\"mediaTitle\"></h1>\n                <button class=\"closeBtn\">X</button>";
+            var video = "\n                <iframe class=\"itemImg\"></iframe>    \n                <h1 class=\"mediaTitle\"></h1>";
             _this = _super.call(this, 'section', 'media', video) || this;
             url = _this.convertURL(url);
         }
         else {
-            var img = "\n                <img class=\"itemImg\"></img>\n                <h1 class=\"mediaTitle\"></h1>\n                <button class=\"closeBtn\">X</button>";
+            var img = "\n                <img class=\"itemImg\"></img>\n                <h1 class=\"mediaTitle\"></h1>";
             _this = _super.call(this, 'section', 'media', img) || this;
         }
         var titles = _this.element.querySelector('.mediaTitle');

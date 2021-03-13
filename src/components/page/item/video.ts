@@ -6,8 +6,7 @@ export class VideoComponent extends BasePageComponentImple<HTMLLIElement>{
         if(sort==='video'){
             const video=`
                 <iframe class="itemImg"></iframe>    
-                <h1 class="mediaTitle"></h1>
-                <button class="closeBtn">X</button>`;
+                <h1 class="mediaTitle"></h1>`;
             super('section','media',video);
 
             url=this.convertURL(url);
@@ -15,8 +14,7 @@ export class VideoComponent extends BasePageComponentImple<HTMLLIElement>{
         else{
             const img=`
                 <img class="itemImg"></img>
-                <h1 class="mediaTitle"></h1>
-                <button class="closeBtn">X</button>`;
+                <h1 class="mediaTitle"></h1>`;
             super('section','media',img);
         }
 
