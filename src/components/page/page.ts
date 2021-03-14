@@ -16,7 +16,6 @@ export class PageItemComponent extends BasePageComponentImple<HTMLElement> imple
     constructor(){
         super('li','pageItem','<button class="closeBtn">X</button>');
         const closeBtn=this.element.querySelector('.closeBtn')! as HTMLButtonElement;
-        console.log(closeBtn);
         closeBtn.onclick=()=>{
             this.element.remove();
         }
@@ -41,6 +40,6 @@ export class PageComponent extends BasePageComponentImple<HTMLUListElement> impl
     addChild(element:BasePageComponent){
         const pageItem=new this.PageItemMaker();
         pageItem.addChild(element);
-        pageItem.attachTo(this.element);
+        pageItem.attachTo(this.element,"afterbegin");
     }
 }

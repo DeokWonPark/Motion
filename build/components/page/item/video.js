@@ -34,7 +34,6 @@ var VideoComponent = (function (_super) {
     VideoComponent.prototype.convertURL = function (url) {
         var regExp = /^(?:https?:\/\/)?(?:www\.)?(?:(?:youtube.com\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9-]{11}))|(?:youtu.be\/([a-zA-Z0-9-]{11})))/;
         var match = url.match(regExp);
-        console.log(match);
         var videoId = match ? match[1] || match[2] : undefined;
         if (videoId) {
             return "https://www.youtube.com/embed/" + videoId;

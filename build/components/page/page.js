@@ -19,7 +19,6 @@ var PageItemComponent = (function (_super) {
     function PageItemComponent() {
         var _this = _super.call(this, 'li', 'pageItem', '<button class="closeBtn">X</button>') || this;
         var closeBtn = _this.element.querySelector('.closeBtn');
-        console.log(closeBtn);
         closeBtn.onclick = function () {
             _this.element.remove();
         };
@@ -47,7 +46,7 @@ var PageComponent = (function (_super) {
     PageComponent.prototype.addChild = function (element) {
         var pageItem = new this.PageItemMaker();
         pageItem.addChild(element);
-        pageItem.attachTo(this.element);
+        pageItem.attachTo(this.element, "afterbegin");
     };
     return PageComponent;
 }(BasePageComponentImple));
