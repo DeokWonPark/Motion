@@ -1,5 +1,6 @@
 export interface BasePageComponent{
     attachTo(parent:HTMLElement,position?:InsertPosition):void;
+    attach(component:BasePageComponent, position?:InsertPosition):void;
 }
 
 export class BasePageComponentImple<T extends HTMLElement> implements BasePageComponent{
@@ -14,5 +15,8 @@ export class BasePageComponentImple<T extends HTMLElement> implements BasePageCo
     }
     attachTo(parent:HTMLElement, position:InsertPosition="beforeend"){
         parent.insertAdjacentElement(position,this.element)
+    }
+    attach(component:BasePageComponent, position?:InsertPosition){
+        component.attachTo(this.element,position);
     }
 } 

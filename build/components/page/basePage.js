@@ -11,6 +11,9 @@ var BasePageComponentImple = (function () {
         if (position === void 0) { position = "beforeend"; }
         parent.insertAdjacentElement(position, this.element);
     };
+    BasePageComponentImple.prototype.attach = function (component, position) {
+        component.attachTo(this.element, position);
+    };
     return BasePageComponentImple;
 }());
 export { BasePageComponentImple };

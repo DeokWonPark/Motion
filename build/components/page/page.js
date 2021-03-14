@@ -23,12 +23,29 @@ var PageItemComponent = (function (_super) {
             _this.element.remove();
         };
         _this.element.setAttribute("draggable", "true");
-        _this.element.addEventListener('dragstart', function () { _this.dragstart_handler(); });
+        _this.element.addEventListener('dragstart', function (ev) { _this.dragstart_handler(ev); });
+        _this.element.addEventListener('dragend', function (ev) { _this.dragend_handler(ev); });
+        _this.element.addEventListener('dragenter', function (ev) { _this.dragenter_handler(ev); });
+        _this.element.addEventListener('dragleave', function (ev) { _this.dragleave_handler(ev); });
         return _this;
     }
-    PageItemComponent.prototype.dragstart_handler = function () {
-        console.log("dragging");
-        return true;
+    PageItemComponent.prototype.dragstart_handler = function (_) {
+        this.notifyDragObservers('start');
+    };
+    PageItemComponent.prototype.dragend_handler = function (_) {
+        this.notifyDragObservers('end');
+    };
+    PageItemComponent.prototype.dragenter_handler = function (_) {
+        this.notifyDragObservers('enter');
+    };
+    PageItemComponent.prototype.dragleave_handler = function (_) {
+        this.notifyDragObservers('leave');
+    };
+    PageItemComponent.prototype.notifyDragObservers = function (state) {
+        this.dragStateListenser && this.dragStateListenser(this, state);
+    };
+    PageItemComponent.prototype.setOnDragStateListener = function (listener) {
+        this.dragStateListenser = listener;
     };
     PageItemComponent.prototype.addChild = function (component) {
         component.attachTo(this.element, 'afterbegin');
@@ -47,16 +64,45 @@ var PageComponent = (function (_super) {
         _this.addChild(imgElement);
         _this.addChild(videoElement);
         _this.addChild(textElement);
-        _this.element.addEventListener('drop', function (event) {
-            console.log('drop');
-            event.preventDefault();
-        });
+        _this.element.addEventListener('dragover', function (ev) { _this.dragover_handler(ev); });
+        _this.element.addEventListener('drop', function (ev) { _this.drop_handler(ev); });
         return _this;
     }
+    PageComponent.prototype.dragover_handler = function (ev) {
+        ev.preventDefault();
+    };
+    PageComponent.prototype.drop_handler = function (ev) {
+        ev.preventDefault();
+        if (!this.dropTarget) {
+            return;
+        }
+        if (this.dragTarget && this.dragTarget !== this.dropTarget) {
+            this.dropTarget.attach(this.dragTarget, 'beforebegin');
+        }
+    };
     PageComponent.prototype.addChild = function (element) {
+        var _this = this;
         var pageItem = new this.PageItemMaker();
         pageItem.addChild(element);
         pageItem.attachTo(this.element, "afterbegin");
+        pageItem.setOnDragStateListener(function (target, state) {
+            switch (state) {
+                case 'start':
+                    _this.dragTarget = target;
+                    break;
+                case 'end':
+                    _this.dragTarget = undefined;
+                    break;
+                case 'enter':
+                    _this.dropTarget = target;
+                    break;
+                case 'leave':
+                    _this.dropTarget = undefined;
+                    break;
+                default:
+                    throw new Error("unsupported state:" + state);
+            }
+        });
     };
     return PageComponent;
 }(BasePageComponentImple));
