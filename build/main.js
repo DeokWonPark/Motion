@@ -6,54 +6,28 @@ import { VideoComponent } from "./components/page/item/video.js";
 import { PageComponent, PageItemComponent } from "./components/page/page.js";
 var App = (function () {
     function App(appRoot) {
-        var _this = this;
+        this.appRoot = appRoot;
         this.page = new PageComponent(PageItemComponent);
         this.page.attachTo(appRoot);
-        var imageBtn = document.querySelector('.imgBtn');
-        imageBtn.addEventListener('click', function () {
+        this.bindElementToModal('.imgBtn', MediaInputComponent, function (input) { return new VideoComponent("img", input.info, input.title); });
+        this.bindElementToModal('.videoBtn', MediaInputComponent, function (input) { return new VideoComponent("video", input.info, input.title); });
+        this.bindElementToModal('.noteBtn', TextInputComponent, function (input) { return new TextComponent(input.title, input.info); });
+        this.bindElementToModal('.taskBtn', TextInputComponent, function (input) { return new TextComponent(input.title, input.info); });
+    }
+    App.prototype.bindElementToModal = function (ButtonType, modalInputComponent, makeComponent) {
+        var _this = this;
+        var elementBtn = document.querySelector(ButtonType);
+        elementBtn.addEventListener('click', function () {
             var modal = new ModalComponent();
-            var mediaInput = new MediaInputComponent();
+            var mediaInput = new modalInputComponent();
             modal.addChild(mediaInput);
             modal.setOnSubmitListener(function () {
-                var imgElement = new VideoComponent("img", mediaInput.info, mediaInput.title);
+                var imgElement = makeComponent(mediaInput);
                 _this.page.addChild(imgElement);
             });
-            modal.attachTo(appRoot);
+            modal.attachTo(_this.appRoot);
         });
-        var videoBtn = document.querySelector('.videoBtn');
-        videoBtn.addEventListener('click', function () {
-            var modal = new ModalComponent();
-            var mediaInput = new MediaInputComponent();
-            modal.addChild(mediaInput);
-            modal.setOnSubmitListener(function () {
-                var videoElement = new VideoComponent("video", mediaInput.info, mediaInput.title);
-                _this.page.addChild(videoElement);
-            });
-            modal.attachTo(appRoot);
-        });
-        var noteBtn = document.querySelector('.noteBtn');
-        noteBtn.addEventListener('click', function () {
-            var modal = new ModalComponent();
-            var textInput = new TextInputComponent();
-            modal.addChild(textInput);
-            modal.setOnSubmitListener(function () {
-                var noteElement = new TextComponent(textInput.title, textInput.info);
-                _this.page.addChild(noteElement);
-            });
-            modal.attachTo(appRoot);
-        });
-        var taskBtn = document.querySelector('.taskBtn');
-        taskBtn.addEventListener('click', function () {
-            var modal = new ModalComponent();
-            var textInput = new TextInputComponent();
-            modal.addChild(textInput);
-            modal.setOnSubmitListener(function () {
-                var taskElement = new TextComponent(textInput.title, textInput.info);
-                _this.page.addChild(taskElement);
-            });
-            modal.attachTo(appRoot);
-        });
-    }
+    };
     return App;
 }());
 new App(document.querySelector('.contents'));

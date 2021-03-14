@@ -1,70 +1,62 @@
 import { MediaInputComponent } from "./components/modal/input/mediaInput.js";
 import { TextInputComponent } from "./components/modal/input/textInput.js";
-import { ModalComponent } from "./components/modal/modal.js";
+import { mediaInputI, ModalComponent } from "./components/modal/modal.js";
 import { BasePageComponent } from "./components/page/basePage.js";
 import { TextComponent } from "./components/page/item/text.js";
 import { VideoComponent } from "./components/page/item/video.js";
 import { Composable, PageComponent, PageItemComponent } from "./components/page/page.js";
+type InputConstructor<T= mediaInputI & BasePageComponent>={
+    new ():T;
+}
 class App{
     private readonly page:BasePageComponent & Composable;
-    constructor(appRoot:HTMLElement){
+    constructor(private appRoot:HTMLElement){
         this.page=new PageComponent(PageItemComponent); //dependuncy injection필요
         this.page.attachTo(appRoot);
 
         //Add Image
-        const imageBtn=document.querySelector('.imgBtn')! as HTMLButtonElement;
-        imageBtn.addEventListener('click',()=>{
-            const modal=new ModalComponent();
-            const mediaInput=new MediaInputComponent();
-            modal.addChild(mediaInput);
-
-            modal.setOnSubmitListener(()=>{
-                const imgElement=new VideoComponent("img",mediaInput.info,mediaInput.title);
-                this.page.addChild(imgElement);
-            });
-            modal.attachTo(appRoot);
-        });
+        this.bindElementToModal<MediaInputComponent>(
+            '.imgBtn',
+            MediaInputComponent,
+            (input:MediaInputComponent)=> new VideoComponent("img",input.info,input.title));
 
         //Add Video
-        const videoBtn=document.querySelector('.videoBtn')! as HTMLButtonElement;
-        videoBtn.addEventListener('click',()=>{
+        this.bindElementToModal<MediaInputComponent>(
+            '.videoBtn',
+            MediaInputComponent,
+            (input:MediaInputComponent)=> new VideoComponent("video",input.info,input.title));
+
+
+        //Add Note
+        this.bindElementToModal<TextInputComponent>(
+            '.noteBtn',
+            TextInputComponent,
+            (input:TextInputComponent)=> new TextComponent(input.title,input.info));
+
+
+        //Add Task
+        this.bindElementToModal<TextInputComponent>(
+            '.taskBtn',
+            TextInputComponent,
+            (input:TextInputComponent)=> new TextComponent(input.title,input.info));
+    }
+
+    private bindElementToModal<T extends mediaInputI & BasePageComponent>(
+        ButtonType:string,
+        modalInputComponent:InputConstructor<T>,
+        makeComponent: (input:T)=>BasePageComponent,
+        ){
+        const elementBtn=document.querySelector(ButtonType)! as HTMLButtonElement;
+        elementBtn.addEventListener('click',()=>{
             const modal=new ModalComponent();
-            const mediaInput=new MediaInputComponent();
+            const mediaInput=new modalInputComponent();
             modal.addChild(mediaInput);
 
             modal.setOnSubmitListener(()=>{
-                const videoElement=new VideoComponent("video",mediaInput.info,mediaInput.title);
-                this.page.addChild(videoElement);
+                const imgElement=makeComponent(mediaInput);
+                this.page.addChild(imgElement);
             });
-            modal.attachTo(appRoot);
-        });
-
-        //Add Note
-        const noteBtn=document.querySelector('.noteBtn')! as HTMLButtonElement;
-        noteBtn.addEventListener('click',()=>{
-            const modal=new ModalComponent();
-            const textInput=new TextInputComponent();
-            modal.addChild(textInput);
-
-            modal.setOnSubmitListener(()=>{
-                const noteElement=new TextComponent(textInput.title,textInput.info);
-                this.page.addChild(noteElement);
-            });
-            modal.attachTo(appRoot);
-        });
-
-        //Add Task
-        const taskBtn=document.querySelector('.taskBtn')! as HTMLButtonElement;
-        taskBtn.addEventListener('click',()=>{
-            const modal=new ModalComponent();
-            const textInput=new TextInputComponent();
-            modal.addChild(textInput);
-
-            modal.setOnSubmitListener(()=>{
-                const taskElement=new TextComponent(textInput.title,textInput.info);
-                this.page.addChild(taskElement);
-            });
-            modal.attachTo(appRoot);
+            modal.attachTo(this.appRoot);
         });
     }
 }

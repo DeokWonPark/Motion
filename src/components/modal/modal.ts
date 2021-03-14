@@ -2,6 +2,11 @@ import { BasePageComponent, BasePageComponentImple } from "../page/basePage.js";
 import { Composable } from "../page/page.js";
 
 type OnSubmitListener=()=>void;
+export interface mediaInputI{
+    title:string,
+    info:string,
+}
+
 export class ModalComponent extends BasePageComponentImple<HTMLElement> implements Composable{
     submitListener?:OnSubmitListener;
     constructor(){

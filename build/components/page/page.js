@@ -22,8 +22,14 @@ var PageItemComponent = (function (_super) {
         closeBtn.onclick = function () {
             _this.element.remove();
         };
+        _this.element.setAttribute("draggable", "true");
+        _this.element.addEventListener('dragstart', function () { _this.dragstart_handler(); });
         return _this;
     }
+    PageItemComponent.prototype.dragstart_handler = function () {
+        console.log("dragging");
+        return true;
+    };
     PageItemComponent.prototype.addChild = function (component) {
         component.attachTo(this.element, 'afterbegin');
     };
@@ -41,6 +47,10 @@ var PageComponent = (function (_super) {
         _this.addChild(imgElement);
         _this.addChild(videoElement);
         _this.addChild(textElement);
+        _this.element.addEventListener('drop', function (event) {
+            console.log('drop');
+            event.preventDefault();
+        });
         return _this;
     }
     PageComponent.prototype.addChild = function (element) {

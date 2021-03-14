@@ -1,6 +1,7 @@
 import { BasePageComponentImple } from "../../page/basePage.js";
+import { mediaInputI } from "../modal.js";
 
-export class MediaInputComponent extends BasePageComponentImple<HTMLDivElement>{
+export class MediaInputComponent extends BasePageComponentImple<HTMLDivElement> implements mediaInputI{
     constructor(){
         const modalInput=`
         <div>
